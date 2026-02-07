@@ -1,0 +1,68 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node*next;
+};
+struct node*head=NULL;
+void addafter(int data,int pos){
+    int i;
+    if(head==NULL){
+        printf("list is empty");
+    }
+    struct node*temp=head,*newnode;
+    while(i<pos-1 && temp!=NULL){
+        temp=temp->next;
+        i++;
+    }
+    if(temp==NULL){
+        printf("invalid position");
+        return;
+    }
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+void insertelement(int data){
+    struct node*newnode;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    newnode->next=NULL;
+    if(head==NULL){
+     head=newnode;
+    return;
+    }
+    struct node*temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newnode;
+}
+void display(){
+    struct node*temp=head;
+    if(head==NULL){
+        printf("list is empty");
+        return;
+    }
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("null");
+}
+int main() {
+    int n,data;
+  printf("enter no of nodes");
+  scanf("%d",&n);
+  
+  for(int i=1;i<=n;i++){
+      printf("enter data for node %d",i);
+      scanf("%d",&data);
+      insertelement(data);
+  }
+  addafter(45,3);
+  display();
+    return 0;
+}
